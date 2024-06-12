@@ -26,6 +26,15 @@ def depreciate(entries: data.Entries, unused_options_map, config_string=""):
                         continue
                     new_postings_config.append((config, posting, new_account))
 
+                # auto create account
+                new_entries.append(data.Open(
+                    entry.meta,
+                    entry.date,
+                    new_account,
+                    None,
+                    None
+                ))
+
                 new_entries.extend(
                     build_steps('depreciate', entry, new_postings_config,
                                 positive=False,
